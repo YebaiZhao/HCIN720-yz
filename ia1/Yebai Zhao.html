@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 
 <html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<head>
     <title>Yebai Zhao</title>
     <meta charset="utf-8">
     <style type="text/css">
@@ -19,13 +20,19 @@
       }
     </style>
     <script src="./Yebai Zhao_files/jquery-1.11.3.min.js"></script>
-    <script type="text/javascript" src="./Yebai Zhao_files/YZscript.js"></script>
-  
+    <script type="text/javascript" src="./Yebai Zhao_files/smoothie.js"></script>
+    <script type="text/paperscript" src="./Yebai Zhao_files/paper-full.min.js"></script>
+</head>
 
-    <script type="text/paperscript" src="./Yebai Zhao_files/paper-full.min.js" canvas="myCanvas">
 
 
-    <script type="text/paperscript" canvas="myCanvas">
+
+
+  <body>
+
+  <!-- not working 
+               <canvas id="myCanvas" resize></canvas> 
+      <script type="text/paperscript" canvas="myCanvas">
       // Create a Paper.js Path to draw a line into it:
       var path = new Path();
       // Give the stroke a color
@@ -37,11 +44,10 @@
       // PaperScript does that for us, and much more!
       path.lineTo(start + [ 100, -50 ]);
     </script>
+  -->
 
-  <body>
-    <canvas id="myCanvas" resize></canvas>
+
+    <canvas id="mycanvas" width="400" height="100"></canvas>
+    <script type="text/javascript" src="./Yebai Zhao_files/YZscript.js"></script>
   </body>
-
-
-<iframe width="0" height="0" frameborder="0" src="about:blank" id="GINGER_SOFTWARE_bubblesIFrame" scrolling="no" style="border: 0px solid; display: none; position: absolute; z-index: 2147483647; height: 0px; width: 0px; background-color: transparent;"></iframe><div id="GingerWidgetInfo" style="display:none;">{"version":"0.1.0.585","isExtension":true,"extensionName":"Chrome"}</div></body>
 </html>
