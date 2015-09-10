@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>Yebai Zhao</title>
+    <style type="text/css">
+      html {
+        height: 100%;
+      }
+      body {
+	margin-top: 50px;
+	margin-right: 50px;
+	margin-left: 50px;
+	margin-bottom: 50px;
+	padding: 0;
+	background: #404040;
+	font-family: sans-serif;
+	height: 100%;
+     }
+    .header {
+	size: 45px;
+	color: #DDDDDD;
+}
+    .legendred {
+		color:red;
+}
+    .legendgreen {
+		color:green;
+}
+    .legendblue {
+		color:#6060ff;
+}
+    </style>
+    <script src="./Yebai Zhao_files/jquery-1.11.3.min.js"></script>
+    <script type="text/javascript" src="./Yebai Zhao_files/smoothie.js"></script>
+    <!-- <script type="text/paperscript" src="./Yebai Zhao_files/paper-full.min.js"></script> -->
+</head>
+
+
+
+
+
+  <body>
+ 
+    <p><strong class="header"> SunTech Drive DAQ Board Sensor Readings </strong></p>
+    <p id="time" class="header">Current Time: </p>
+  <!-- not working 
+               <canvas id="myCanvas" resize></canvas> 
+      <script type="text/paperscript" canvas="myCanvas">
+      // Create a Paper.js Path to draw a line into it:
+      var path = new Path();
+      // Give the stroke a color
+      path.strokeColor = 'red';
+      var start = new Point(100, 100);
+      // Move to start and draw a line from there
+      path.moveTo(start);
+      // Note the plus operator on Point objects.
+      // PaperScript does that for us, and much more!
+      path.lineTo(start + [ 100, -50 ]);
+    </script>
+  -->
+
+   	 <div>
+        <canvas id="mycanvas_1" width="500" height="200"></canvas>
+        <p id= "legendred" class="legendred">wating </p>
+        <p id= "legendgreen" class="legendgreen">wating </p>
+        <p id= "legendblue" class="legendblue">wating </p>
+     </div>
+
+    <div>
+      <canvas id="mycanvas_2" width="500" height="200"></canvas>
+      <p id= "legendred2" class="legendred">wating </p>
+      <p id= "legendgreen2" class="legendgreen">wating </p>
+      <p id= "legendblue2" class="legendblue">wating </p>
+    </div>
+
+    <script type="text/javascript" src="./Yebai Zhao_files/YZscript.js"></script>
+  </body>
+</html>
