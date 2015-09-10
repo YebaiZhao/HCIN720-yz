@@ -4,7 +4,7 @@
 var public_key = 'RM1xmbzxarFlR7b065jV';
 var API_Url= 'https://data.sparkfun.com/output/' + public_key +'.json';
 //var $ = require("jquery");/
-var Rec_data;
+//var Rec_data;
 
 
 //for testing
@@ -18,7 +18,7 @@ var pv_current_amp;
 var pv_power_watts;
 var pv_voltage_volts;
 var timestamp;
-var voltage_dc
+var voltage_dc;
 
 
 
@@ -55,24 +55,34 @@ function getData(){
 }
 
 
-makeChart("mycanvas_1");
-//The following adapted from http://smoothiecharts.org/tutorial.html
-function makeChart(mycanvasID){
 
+//The following adapted from http://smoothiecharts.org/tutorial.html
   var smoothie = new SmoothieChart(
     {
-      millisPerPixel:1000,
+      millisPerPixel:5000,
       interpolation:'linear',  //optional 
       grid: { strokeStyle:'rgb(64, 64, 64)', fillStyle:'rgb(10, 10, 10)',
-            lineWidth: 1, millisPerLine: 50000, verticalSections: 6, },
+            lineWidth: 1, millisPerLine: 100000, verticalSections: 6, },
       labels: { fillStyle:'rgb(128, 128, 128)' },
       //timestampFormatter:function(){return timestamp;}//this shows real time , not data sample time!!
     }
   );
    setInterval(function() {
-    line1.append(new Date().getTime(), (pv_voltage_volts/10));
+    line1.append(new Date().getTime(), pv_voltage_volts);
     line2.append(new Date().getTime(), pv_current_amp);
     line3.append(new Date().getTime(), pv_power_watts);
+  	var newLabel1=document.getElementById("legendred");
+  	newLabel1.innerHTML="PV Voltage: "+pv_voltage_volts+" Volts";
+
+    var newLabel1=document.getElementById("legendgreen");
+    newLabel1.innerHTML="PV Current: "+pv_current_amp+" Amp";
+
+    var newLabel1=document.getElementById("legendblue");
+    newLabel1.innerHTML="PV Power: "+pv_power_watts+" Watts";
+
+    var newLabel1=document.getElementById("time");
+    newLabel1.innerHTML="Current Time: "+timestamp;
+
   }, 10000);
 
   // Data 
@@ -85,44 +95,52 @@ function makeChart(mycanvasID){
   //smoothie.addTimeSeries(line1);
   smoothie.addTimeSeries(line1,{ strokeStyle:'#ff0000', fillStyle:'rgba(128, 0, 0, 0.4)', lineWidth:3 });
   smoothie.addTimeSeries(line2,{ strokeStyle:'#00ff00', fillStyle:'rgba(0, 128, 0, 0.4)', lineWidth:3 });
-  smoothie.addTimeSeries(line3,{ strokeStyle:'#0000ff', fillStyle:'rgba(0, 0, 128, 0.4)', lineWidth:3 });
+  smoothie.addTimeSeries(line3,{ strokeStyle:'#2020ff', fillStyle:'rgba(0, 0, 128, 0.4)', lineWidth:3 });
 
-  smoothie.streamTo(document.getElementById(mycanvasID));
-}
+  smoothie.streamTo(document.getElementById("mycanvas_1"));
 
-makeChart("mycanvas_2");
+
+
 //The following adapted from http://smoothiecharts.org/tutorial.html
-function makeChart(mycanvasID){
+
 
   var smoothie = new SmoothieChart(
     {
-      millisPerPixel:1000,
+      millisPerPixel:5000,
       interpolation:'linear',  //optional 
       grid: { strokeStyle:'rgb(64, 64, 64)', fillStyle:'rgb(10, 10, 10)',
-            lineWidth: 1, millisPerLine: 50000, verticalSections: 6, },
+            lineWidth: 1, millisPerLine: 100000, verticalSections: 6, },
       labels: { fillStyle:'rgb(128, 128, 128)' },
       //timestampFormatter:function(){return timestamp;}//this shows real time , not data sample time!!
     }
   );
    setInterval(function() {
-    line1.append(new Date().getTime(), voltage_dc);
-    line2.append(new Date().getTime(), 0);
-    line3.append(new Date().getTime(), 0);
+    line4.append(new Date().getTime(), voltage_dc);
+    line5.append(new Date().getTime(), flow_rate_gpm);
+    line6.append(new Date().getTime(), current_dc);
+    var newLabel1=document.getElementById("legendred2");
+    newLabel1.innerHTML="Voltage DC: "+voltage_dc+" Volts";
+
+    var newLabel1=document.getElementById("legendgreen2");
+    newLabel1.innerHTML="Flow Rate : "+flow_rate_gpm+" RPM";
+
+    var newLabel1=document.getElementById("legendblue2");
+    newLabel1.innerHTML="Current DC: "+current_dc+" Amp";
   }, 10000);
 
   // Data 
-  var line1 = new TimeSeries();
-  var line2 = new TimeSeries();
-  var line3 = new TimeSeries();
+  var line4 = new TimeSeries();
+  var line5 = new TimeSeries();
+  var line6 = new TimeSeries();
 
  
   // Add to SmoothieChart
   //smoothie.addTimeSeries(line1);
-  smoothie.addTimeSeries(line1,{ strokeStyle:'#ff0000', fillStyle:'rgba(128, 0, 0, 0.4)', lineWidth:3 });
-  smoothie.addTimeSeries(line2,{ strokeStyle:'#00ff00', fillStyle:'rgba(0, 128, 0, 0.4)', lineWidth:3 });
-  smoothie.addTimeSeries(line3,{ strokeStyle:'#0000ff', fillStyle:'rgba(0, 0, 128, 0.4)', lineWidth:3 });
+  smoothie.addTimeSeries(line4,{ strokeStyle:'#ff0000', fillStyle:'rgba(128, 0, 0, 0.4)', lineWidth:3 });
+  smoothie.addTimeSeries(line5,{ strokeStyle:'#00ff00', fillStyle:'rgba(0, 128, 0, 0.4)', lineWidth:3 });
+  smoothie.addTimeSeries(line6,{ strokeStyle:'#2020ff', fillStyle:'rgba(0, 0, 128, 0.4)', lineWidth:3 });
 
-  smoothie.streamTo(document.getElementById(mycanvasID));
-}
+  smoothie.streamTo(document.getElementById("mycanvas_2"));
+
 
 

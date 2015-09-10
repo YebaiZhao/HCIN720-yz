@@ -1,27 +1,40 @@
 <!DOCTYPE html>
 
-<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<html lang="en">
 <head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title>Yebai Zhao</title>
-    <meta charset="utf-8">
     <style type="text/css">
       html {
         height: 100%;
       }
       body {
-        margin: 0;
-        padding: 0;
-        background: #000000;
-        color: #ffffff;
-        font-family: sans-serif;
-        font-size: 13px;
-        line-height: 20px;
-        height: 100%;
-      }
+	margin-top: 50px;
+	margin-right: 50px;
+	margin-left: 50px;
+	margin-bottom: 50px;
+	padding: 0;
+	background: #404040;
+	font-family: sans-serif;
+	height: 100%;
+     }
+    .header {
+	size: 45px;
+	color: #DDDDDD;
+}
+    .legendred {
+		color:red;
+}
+    .legendgreen {
+		color:green;
+}
+    .legendblue {
+		color:#6060ff;
+}
     </style>
     <script src="./Yebai Zhao_files/jquery-1.11.3.min.js"></script>
     <script type="text/javascript" src="./Yebai Zhao_files/smoothie.js"></script>
-    <script type="text/paperscript" src="./Yebai Zhao_files/paper-full.min.js"></script>
+    <!-- <script type="text/paperscript" src="./Yebai Zhao_files/paper-full.min.js"></script> -->
 </head>
 
 
@@ -29,7 +42,9 @@
 
 
   <body>
-
+ 
+    <p><strong class="header"> SunTech Drive DAQ Board Sensor Readings </strong></p>
+    <p id="time" class="header">Current Time: </p>
   <!-- not working 
                <canvas id="myCanvas" resize></canvas> 
       <script type="text/paperscript" canvas="myCanvas">
@@ -46,10 +61,20 @@
     </script>
   -->
 
+   	 <div>
+        <canvas id="mycanvas_1" width="500" height="200"></canvas>
+        <p id= "legendred" class="legendred">wating </p>
+        <p id= "legendgreen" class="legendgreen">wating </p>
+        <p id= "legendblue" class="legendblue">wating </p>
+     </div>
 
-    <canvas id="mycanvas_1" width="400" height="200"></canvas>
+    <div>
+      <canvas id="mycanvas_2" width="500" height="200"></canvas>
+      <p id= "legendred2" class="legendred">wating </p>
+      <p id= "legendgreen2" class="legendgreen">wating </p>
+      <p id= "legendblue2" class="legendblue">wating </p>
+    </div>
 
-    <canvas id="mycanvas_2" width="400" height="200"></canvas>
     <script type="text/javascript" src="./Yebai Zhao_files/YZscript.js"></script>
   </body>
 </html>
