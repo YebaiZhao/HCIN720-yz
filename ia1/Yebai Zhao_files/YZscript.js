@@ -49,27 +49,15 @@ function getData(){
         pv_voltage_volts=response[0].pv_voltage_volts;
         timestamp=response[0].timestamp;
         voltage_dc=response[0].voltage_dc;
-        console.log(current_dc);
-
+        console.log(response[0]);
       }
   });
 }
-makeChart("mycanvas_1",(pv_voltage_volts/10),pv_current_amp,pv_power_watts);
 
 
+makeChart("mycanvas_1");
 //The following adapted from http://smoothiecharts.org/tutorial.html
-function makeChart(mycanvasID,data1,data2,data3){
-  // Data 
-  var line1 = new TimeSeries();
-  var line2 = new TimeSeries();
-  var line3 = new TimeSeries();
-
-  // Add a random value to each line every 10 second
-  setInterval(function() {
-    line1.append(new Date().getTime(), data1);
-    line2.append(new Date().getTime(), data2);
-    line3.append(new Date().getTime(), data3);
-  }, 10000);
+function makeChart(mycanvasID){
 
   var smoothie = new SmoothieChart(
     {
@@ -81,16 +69,60 @@ function makeChart(mycanvasID,data1,data2,data3){
       //timestampFormatter:function(){return timestamp;}//this shows real time , not data sample time!!
     }
   );
-  
-  
-// Add to SmoothieChart
-//smoothie.addTimeSeries(line1);
-  smoothie.addTimeSeries(line1,{ strokeStyle:'rgb(0, 255, 0)', fillStyle:'rgba(0, 255, 0, 0.4)', lineWidth:3 });
-  smoothie.addTimeSeries(line2,{ strokeStyle:'rgb(0, 0, 255)', fillStyle:'rgba(0, 0, 255, 0.4)', lineWidth:3 });
-  smoothie.addTimeSeries(line3,{ strokeStyle:'rgb(255, 0, 0)', fillStyle:'rgba(255, 0, 0, 0.4)', lineWidth:3 });
+   setInterval(function() {
+    line1.append(new Date().getTime(), (pv_voltage_volts/10));
+    line2.append(new Date().getTime(), pv_current_amp);
+    line3.append(new Date().getTime(), pv_power_watts);
+  }, 10000);
+
+  // Data 
+  var line1 = new TimeSeries();
+  var line2 = new TimeSeries();
+  var line3 = new TimeSeries();
+
+ 
+  // Add to SmoothieChart
+  //smoothie.addTimeSeries(line1);
+  smoothie.addTimeSeries(line1,{ strokeStyle:'#ff0000', fillStyle:'rgba(128, 0, 0, 0.4)', lineWidth:3 });
+  smoothie.addTimeSeries(line2,{ strokeStyle:'#00ff00', fillStyle:'rgba(0, 128, 0, 0.4)', lineWidth:3 });
+  smoothie.addTimeSeries(line3,{ strokeStyle:'#0000ff', fillStyle:'rgba(0, 0, 128, 0.4)', lineWidth:3 });
 
   smoothie.streamTo(document.getElementById(mycanvasID));
 }
 
+makeChart("mycanvas_2");
+//The following adapted from http://smoothiecharts.org/tutorial.html
+function makeChart(mycanvasID){
+
+  var smoothie = new SmoothieChart(
+    {
+      millisPerPixel:1000,
+      interpolation:'linear',  //optional 
+      grid: { strokeStyle:'rgb(64, 64, 64)', fillStyle:'rgb(10, 10, 10)',
+            lineWidth: 1, millisPerLine: 50000, verticalSections: 6, },
+      labels: { fillStyle:'rgb(128, 128, 128)' },
+      //timestampFormatter:function(){return timestamp;}//this shows real time , not data sample time!!
+    }
+  );
+   setInterval(function() {
+    line1.append(new Date().getTime(), voltage_dc);
+    line2.append(new Date().getTime(), 0);
+    line3.append(new Date().getTime(), 0);
+  }, 10000);
+
+  // Data 
+  var line1 = new TimeSeries();
+  var line2 = new TimeSeries();
+  var line3 = new TimeSeries();
+
+ 
+  // Add to SmoothieChart
+  //smoothie.addTimeSeries(line1);
+  smoothie.addTimeSeries(line1,{ strokeStyle:'#ff0000', fillStyle:'rgba(128, 0, 0, 0.4)', lineWidth:3 });
+  smoothie.addTimeSeries(line2,{ strokeStyle:'#00ff00', fillStyle:'rgba(0, 128, 0, 0.4)', lineWidth:3 });
+  smoothie.addTimeSeries(line3,{ strokeStyle:'#0000ff', fillStyle:'rgba(0, 0, 128, 0.4)', lineWidth:3 });
+
+  smoothie.streamTo(document.getElementById(mycanvasID));
+}
 
 
