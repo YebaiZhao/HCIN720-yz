@@ -59,7 +59,9 @@ function getData(){
 //The following adapted from http://smoothiecharts.org/tutorial.html
   var smoothie = new SmoothieChart(
     {
-      millisPerPixel:5000,
+      millisPerPixel:2500,
+      maxValue:170,
+      minValue:0,
       interpolation:'linear',  //optional 
       grid: { strokeStyle:'rgb(64, 64, 64)', fillStyle:'rgb(10, 10, 10)',
             lineWidth: 1, millisPerLine: 100000, verticalSections: 6, },
@@ -69,13 +71,13 @@ function getData(){
   );
    setInterval(function() {
     line1.append(new Date().getTime(), pv_voltage_volts);
-    line2.append(new Date().getTime(), pv_current_amp);
+    line2.append(new Date().getTime(), voltage_dc);
     line3.append(new Date().getTime(), pv_power_watts);
   	var newLabel1=document.getElementById("legendred");
   	newLabel1.innerHTML="PV Voltage: "+pv_voltage_volts+" Volts";
 
     var newLabel1=document.getElementById("legendgreen");
-    newLabel1.innerHTML="PV Current: "+pv_current_amp+" Amp";
+    newLabel1.innerHTML="DC Voltage: "+voltage_dc+" Volts";
 
     var newLabel1=document.getElementById("legendblue");
     newLabel1.innerHTML="PV Power: "+pv_power_watts+" Watts";
@@ -104,9 +106,10 @@ function getData(){
 //The following adapted from http://smoothiecharts.org/tutorial.html
 
 
-  var smoothie = new SmoothieChart(
+  var smoothie2 = new SmoothieChart(
     {
-      millisPerPixel:5000,
+      millisPerPixel:2500,
+      minValue:0,
       interpolation:'linear',  //optional 
       grid: { strokeStyle:'rgb(64, 64, 64)', fillStyle:'rgb(10, 10, 10)',
             lineWidth: 1, millisPerLine: 100000, verticalSections: 6, },
@@ -115,17 +118,17 @@ function getData(){
     }
   );
    setInterval(function() {
-    line4.append(new Date().getTime(), voltage_dc);
-    line5.append(new Date().getTime(), flow_rate_gpm);
-    line6.append(new Date().getTime(), current_dc);
+    line4.append(new Date().getTime(), pv_current_amp);
+    line5.append(new Date().getTime(), current_dc);
+    line6.append(new Date().getTime(), flow_rate_gpm);
     var newLabel1=document.getElementById("legendred2");
-    newLabel1.innerHTML="Voltage DC: "+voltage_dc+" Volts";
+    newLabel1.innerHTML="PV Current: "+pv_current_amp+" Amp";
 
     var newLabel1=document.getElementById("legendgreen2");
-    newLabel1.innerHTML="Flow Rate : "+flow_rate_gpm+" RPM";
+    newLabel1.innerHTML="DC Current : "+current_dc+" Amp";
 
     var newLabel1=document.getElementById("legendblue2");
-    newLabel1.innerHTML="Current DC: "+current_dc+" Amp";
+    newLabel1.innerHTML="Flow Rate : "+flow_rate_gpm+" RPM";
   }, 10000);
 
   // Data 
@@ -136,11 +139,39 @@ function getData(){
  
   // Add to SmoothieChart
   //smoothie.addTimeSeries(line1);
-  smoothie.addTimeSeries(line4,{ strokeStyle:'#ff0000', fillStyle:'rgba(128, 0, 0, 0.4)', lineWidth:3 });
-  smoothie.addTimeSeries(line5,{ strokeStyle:'#00ff00', fillStyle:'rgba(0, 128, 0, 0.4)', lineWidth:3 });
-  smoothie.addTimeSeries(line6,{ strokeStyle:'#2020ff', fillStyle:'rgba(0, 0, 128, 0.4)', lineWidth:3 });
+  smoothie2.addTimeSeries(line4,{ strokeStyle:'#ff0000', fillStyle:'rgba(128, 0, 0, 0.4)', lineWidth:3 });
+  smoothie2.addTimeSeries(line5,{ strokeStyle:'#00ff00', fillStyle:'rgba(0, 128, 0, 0.4)', lineWidth:3 });
+  smoothie2.addTimeSeries(line6,{ strokeStyle:'#2020ff', fillStyle:'rgba(0, 0, 128, 0.4)', lineWidth:3 });
 
-  smoothie.streamTo(document.getElementById("mycanvas_2"));
+  smoothie2.streamTo(document.getElementById("mycanvas_2"));
+
+var smoothie3 = new SmoothieChart(
+    {
+      millisPerPixel:2500,
+      minValue:0,
+      interpolation:'linear',  //optional 
+      grid: { strokeStyle:'rgb(64, 64, 64)', fillStyle:'rgb(10, 10, 10)',
+            lineWidth: 1, millisPerLine: 100000, verticalSections: 6, },
+      labels: { fillStyle:'rgb(128, 128, 128)' },
+      //timestampFormatter:function(){return timestamp;}//this shows real time , not data sample time!!
+    }
+  );
+   setInterval(function() {
+    line7.append(new Date().getTime(), irradiance_w_per_m2);
+
+    var newLabel1=document.getElementById("legendred3");
+    newLabel1.innerHTML="Irradiance: "+irradiance_w_per_m2+" W/M<sup>2</sup>";
+
+  }, 10000);
+
+  // Data 
+  var line7 = new TimeSeries();
 
 
+ 
+  // Add to SmoothieChart
+  //smoothie.addTimeSeries(line1);
+  smoothie3.addTimeSeries(line7,{ strokeStyle:'#ff0000', fillStyle:'rgba(128, 0, 0, 0.4)', lineWidth:3 });
+  
+  smoothie3.streamTo(document.getElementById("mycanvas_3"));
 
